@@ -76,7 +76,38 @@ runcmd(struct cmd *cmd)
     ecmd = (struct execcmd*)cmd;
     if(ecmd->argv[0] == 0)
       exit(1);
-    exec(ecmd->argv[0], ecmd->argv);
+    if(ecmd->argv[0] && strcmp(ecmd->argv[0], "!") == 0) {
+      int i = 1;
+      int len = 0;
+      while(ecmd->argv[i] != 0) {
+        len += strlen(ecmd->argv[i]);
+        i++;
+      }
+      if (len > 512) {
+        fprintf(1, "Message too long\n");
+      } else {
+        i = 1;
+        while(ecmd->argv[i] != 0) {
+            char *arg = ecmd->argv[i];
+            int j = 0;
+          while (arg[j] != '\0') {
+              if (arg[j] == 'o' && arg[j + 1] == 's') {
+                  printf("\033[34mos\033[0m");
+                  j += 2;
+              } else {
+                  write(1, &arg[j], 1);
+                  j++;
+              }
+          }
+          if (ecmd->argv[i + 1] != 0) {
+              fprintf(1, " ");
+          }
+          i++;
+        }
+        fprintf(1, "\n");
+      }
+      exit(0); 
+    }
     fprintf(2, "exec %s failed\n", ecmd->argv[0]);
     break;
 
