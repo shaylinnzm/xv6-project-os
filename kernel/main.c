@@ -30,8 +30,10 @@ main()
     fileinit();      // file table
     virtio_disk_init(); // emulated hard disk
 
-
-
+    log_message(log_level_info, "Welcome to AUT MCS Principles of Operating Systems Course. This message is from a custom logger implemented by Shaylin and Majid");
+    log_message(log_level_warn, "This is a test warning message for the custom logger");
+    log_message(log_level_error, "This is a test error message for the custom logger");
+    
     userinit();      // first user process
     __sync_synchronize();
     started = 1;
@@ -44,10 +46,6 @@ main()
     trapinithart();   // install kernel trap vector
     plicinithart();   // ask PLIC for device interrupts
   }
-
-  log_message(log_level_info, "Welcome to AUT MCS Principles of Operating Systems Course. This message is from a custom logger implemented by Shaylin and Majid");
-  log_message(log_level_warn, "This is a test warning message for the custom logger");
-  log_message(log_level_error, "This is a test error message for the custom logger");
 
   scheduler();        
 }
