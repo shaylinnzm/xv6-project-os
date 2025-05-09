@@ -11,6 +11,7 @@ OBJS = \
   $K/spinlock.o \
   $K/string.o \
   $K/main.o \
+  $K/custom_logger.o \
   $K/vm.o \
   $K/proc.o \
   $K/swtch.o \
@@ -138,6 +139,7 @@ UPROGS=\
 	$U/_usertests\
 	$U/_grind\
 	$U/_wc\
+        $U/_trigger_test\
 	$U/_zombie\
 
 fs.img: mkfs/mkfs README $(UPROGS)
