@@ -65,6 +65,15 @@ sys_sleep(void)
   argint(0, &n);
   if(n < 0)
     n = 0;
+  
+  if(n==0){
+    acquire(&tickslock);
+    ticks0 = ticks;
+    release(&tickslock);
+    sleepthread(0, ticks0);
+    return 0;
+  }
+  
   acquire(&tickslock);
   ticks0 = ticks;
   //addeddd
