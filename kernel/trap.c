@@ -72,7 +72,7 @@ usertrap(void)
     // For simplicity, we'll just terminate the thread on any unexpected trap.
     if (r_sepc() != r_stval() || r_scause() != 0xc) {
       printf("usertrap(): thread unexpected scause 0x%lx pid=%d tid=%d\n", r_scause(), p->pid, p->current_thread->id);
-      printf("            sepc=0x%lx stval=0x%lx\n", r_sepc(), r_stval());
+      printf(" sepc=0x%lx stval=0x%lx\n", r_sepc(), r_stval());
     }
     exitthread();
   }else {

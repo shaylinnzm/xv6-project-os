@@ -37,7 +37,7 @@ void *my_thread(void *arg) {
         // Release lock after printing
         
         // Try to yield by calling a system call that trigger scheduling
-        sleep(1);  // Sleep for 0 ticks - this should trigger thread scheduling
+        sleep(1);  // Sleep for 1 tick - this should trigger thread scheduling
     }
     return (void *) ((struct thread_data *) arg)->start_number;
 }
@@ -69,7 +69,7 @@ int main(int argc, char *argv[]) {
     jointhread(ta);
     jointhread(tb);
     jointhread(tc);
-
+    
     acquire_print_lock();
     printf("DONE\n");
     release_print_lock();
